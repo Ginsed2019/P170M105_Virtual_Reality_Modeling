@@ -33,3 +33,6 @@ Requirements:
   8. FIXME
   9. FIXME
   10. FIXME
+
+* Texture sources:
+  1. [Medieval Pavement Floor - PBR0233](https://www.textures.com/download/medieval-pavement-floor-pbr0233/133952)
