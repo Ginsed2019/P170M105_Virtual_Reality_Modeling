@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdajxqhb5kbvc"
+path="res://.godot/imported/Artorias_Sword.obj-9765d3d8431eb5111d74a980ea989479.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Artorias_Sword.obj-9765d3d8431eb5111d74a980ea989479.mesh"]
+
+source_file="res://textures/sword/Artorias_Sword.obj"
+dest_files=["res://.godot/imported/Artorias_Sword.obj-9765d3d8431eb5111d74a980ea989479.mesh", "res://.godot/imported/Artorias_Sword.obj-9765d3d8431eb5111d74a980ea989479.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
