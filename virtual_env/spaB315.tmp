@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://b3crwvd275nm7"]
+[gd_scene load_steps=94 format=3 uid="uid://b3crwvd275nm7"]
 
 [ext_resource type="Texture2D" uid="uid://b5uxi70uetyyr" path="res://textures/floor/TCom_Pavement_Medieval_512_albedo.jpg" id="1_fwsct"]
 [ext_resource type="Texture2D" uid="uid://calja6hkyqoqn" path="res://textures/floor/TCom_Pavement_Medieval_512_height.jpg" id="2_b5g48"]
@@ -23,7 +23,10 @@
 [ext_resource type="ArrayMesh" uid="uid://cywr2hqia2qqk" path="res://textures/skateboard/uploads_files_3227325_FULL.obj" id="21_8e82b"]
 [ext_resource type="Script" path="res://scripts/inte_sword.gd" id="22_0oh50"]
 [ext_resource type="ArrayMesh" uid="uid://bdajxqhb5kbvc" path="res://textures/sword/Artorias_Sword.obj" id="22_lb7ug"]
+[ext_resource type="Texture2D" uid="uid://bgmgo2vnr4t45" path="res://textures/sword/Sword_albedo.jpg" id="23_hks47"]
+[ext_resource type="Texture2D" uid="uid://cedh1ycp0h7wm" path="res://textures/sword/Sword_metallic.jpg" id="24_vgouf"]
 [ext_resource type="Texture2D" uid="uid://bh8wrsgvj34hf" path="res://textures/sword/Sword_normal.jpg" id="25_j2axc"]
+[ext_resource type="Texture2D" uid="uid://csrjj1006l3d" path="res://textures/sword/Sword_roughness.jpg" id="26_fpu2f"]
 [ext_resource type="ArrayMesh" uid="uid://cb7jiuv7em7y0" path="res://textures/monitor/OldMonitor03.obj" id="27_4ua3x"]
 [ext_resource type="ArrayMesh" uid="uid://ba354ni4wya08" path="res://textures/car/TeslaModelS.obj" id="28_pt2sq"]
 [ext_resource type="Texture2D" uid="uid://bwn7op5em4ov4" path="res://textures/car/TeslaModelS_Base_Color.png" id="29_cee1u"]
@@ -33,7 +36,6 @@
 [ext_resource type="Script" path="res://scripts/player_inte.gd" id="33_cyyp2"]
 [ext_resource type="Script" path="res://scripts/pickup.gd" id="34_eihah"]
 [ext_resource type="Script" path="res://scripts/inte_labe.gd" id="34_j8wn1"]
-[ext_resource type="Script" path="res://scripts/cube.gd" id="34_vus0m"]
 [ext_resource type="Script" path="res://scripts/inte_ball.gd" id="35_8vix8"]
 [ext_resource type="Script" path="res://scripts/inte_ball_add.gd" id="36_tcx2k"]
 [ext_resource type="Script" path="res://scripts/inte_box.gd" id="38_v2f7r"]
@@ -152,7 +154,11 @@ albedo_texture = ExtResource("19_durik")
 size = Vector3(0.221985, 0.112183, 0.806885)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxftg"]
-albedo_color = Color(0, 0, 0, 1)
+albedo_texture = ExtResource("23_hks47")
+metallic = 1.0
+metallic_texture = ExtResource("24_vgouf")
+roughness_texture = ExtResource("26_fpu2f")
+normal_enabled = true
 normal_texture = ExtResource("25_j2axc")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tc1o4"]
@@ -196,8 +202,6 @@ size = Vector3(0.7, 0.7, 0.7)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xrrd1"]
 size = Vector3(0.7, 0.7, 0.7)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yuq5a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdxhd"]
 albedo_color = Color(0.676448, 0.577881, 0, 1)
@@ -319,7 +323,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4d1cw")
 shape = SubResource("SphereShape3D_71xm2")
 
 [node name="Chair" type="RigidBody3D" parent="."]
-transform = Transform3D(-0.999954, 0, -0.00963402, 0, 1, 0, 0.00963402, 0, -0.999954, -0.38769, 0, -1.32723)
+transform = Transform3D(-0.999954, 0, -0.00963402, 0, 1, 0, 0.00963402, 0, -0.999954, -0.987288, 0, -1.32723)
 
 [node name="UploadsFiles3104459Office+chair" type="MeshInstance3D" parent="Chair"]
 transform = Transform3D(0.894193, 0, 0.447681, 0, 1, 0, -0.447681, 0, 0.894193, 0.388489, -0.169461, 0.207305)
@@ -392,7 +396,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00271606, 0.0547485, -0.00
 shape = SubResource("BoxShape3D_5gdfh")
 
 [node name="Sword" type="RigidBody3D" parent="."]
-transform = Transform3D(-0.211325, -0.92607, 0.312629, 0, 0.319852, 0.947468, -0.977416, 0.200223, -0.0675927, -0.903295, 1.28684, -1.84206)
+transform = Transform3D(1, 0, 0, 0, 0.948274, 0.317454, 0, -0.317454, 0.948274, 1.58466, 0.247467, -0.111176)
 script = ExtResource("22_0oh50")
 
 [node name="ArtoriasSword" type="MeshInstance3D" parent="Sword"]
@@ -523,18 +527,12 @@ vertical_alignment = 1
 
 [node name="CUBE" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.419024, 0.664937)
-script = ExtResource("34_vus0m")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CUBE"]
 mesh = SubResource("BoxMesh_cojim")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CUBE"]
 shape = SubResource("BoxShape3D_xrrd1")
-
-[node name="Area3D" type="Area3D" parent="CUBE"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CUBE/Area3D"]
-shape = SubResource("BoxShape3D_yuq5a")
 
 [node name="BALL" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.43649, 1.81516, -1.15631)
@@ -591,5 +589,4 @@ shape = SubResource("BoxShape3D_oqqsx")
 
 [connection signal="inte_hov" from="Basic FPS Player/Head/RayCast3D" to="Basic FPS Player/Control/Label" method="show_inte_text"]
 [connection signal="inte_unhov" from="Basic FPS Player/Head/RayCast3D" to="Basic FPS Player/Control/Label" method="hide_inte_text"]
-[connection signal="body_entered" from="CUBE/Area3D" to="CUBE" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="BOX" to="BOX" method="_on_body_entered"]
