@@ -1,5 +1,6 @@
-[gd_scene load_steps=93 format=3 uid="uid://b3crwvd275nm7"]
+[gd_scene load_steps=105 format=3 uid="uid://b3crwvd275nm7"]
 
+[ext_resource type="Script" path="res://scripts/light_rotate.gd" id="1_bp3jt"]
 [ext_resource type="Texture2D" uid="uid://b5uxi70uetyyr" path="res://textures/floor/TCom_Pavement_Medieval_512_albedo.jpg" id="1_fwsct"]
 [ext_resource type="Texture2D" uid="uid://calja6hkyqoqn" path="res://textures/floor/TCom_Pavement_Medieval_512_height.jpg" id="2_b5g48"]
 [ext_resource type="Texture2D" uid="uid://bgxfyq8btlshw" path="res://textures/floor/TCom_Pavement_Medieval_512_normal.jpg" id="3_8qoxl"]
@@ -35,8 +36,18 @@
 [ext_resource type="Script" path="res://scripts/inte_labe.gd" id="34_j8wn1"]
 [ext_resource type="Script" path="res://scripts/cube.gd" id="34_vus0m"]
 [ext_resource type="Script" path="res://scripts/inte_ball.gd" id="35_8vix8"]
+[ext_resource type="AudioStream" uid="uid://g3xktnj2jl2o" path="res://sounds/coin_c_02-102844.mp3" id="35_timbg"]
+[ext_resource type="AudioStream" uid="uid://dgwjygtn7q6cr" path="res://sounds/ring-drop-263966.mp3" id="36_lmxth"]
 [ext_resource type="Script" path="res://scripts/inte_ball_add.gd" id="36_tcx2k"]
 [ext_resource type="Script" path="res://scripts/inte_box.gd" id="38_v2f7r"]
+[ext_resource type="AudioStream" uid="uid://ct18exupsj2ei" path="res://sounds/pad-space-travel-hyperdrive-engine-humming-235901.mp3" id="41_ypqwj"]
+[ext_resource type="Script" path="res://scripts/bacground.gd" id="42_h8kk1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffvb3"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_go2ng"]
+material = SubResource("StandardMaterial3D_ffvb3")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wllmn"]
 albedo_texture = ExtResource("1_fwsct")
@@ -227,10 +238,36 @@ size = Vector3(0.4, 0.4, 0.4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oqqsx"]
 size = Vector3(0.4, 0.4, 0.4)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_erje3"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hs4tw"]
+material = SubResource("StandardMaterial3D_erje3")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Environment" id="Environment_hapol"]
+background_mode = 1
+fog_enabled = true
+fog_light_energy = 30.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtnfu"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.631373)
+
+[sub_resource type="SphereMesh" id="SphereMesh_in6sa"]
+material = SubResource("StandardMaterial3D_dtnfu")
+radius = 0.05
+height = 0.1
+
 [node name="Spatial" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.76339, -0.380174, 0.52221, 0, 0.808452, 0.588562, -0.645937, -0.449302, 0.617165, 3.01839, 4.62433, 3.80769)
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 5, 0)
+shadow_enabled = true
+script = ExtResource("1_bp3jt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DirectionalLight3D"]
+mesh = SubResource("SphereMesh_go2ng")
 
 [node name="Room" type="StaticBody3D" parent="."]
 
@@ -521,6 +558,12 @@ text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="AudioPlayer" type="AudioStreamPlayer3D" parent="Basic FPS Player"]
+stream = ExtResource("35_timbg")
+
+[node name="Drop" type="AudioStreamPlayer3D" parent="Basic FPS Player"]
+stream = ExtResource("36_lmxth")
+
 [node name="CUBE" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.419024, 0.664937)
 script = ExtResource("34_vus0m")
@@ -579,7 +622,7 @@ shape = SubResource("SphereShape3D_fnj6o")
 mesh = SubResource("SphereMesh_d42wt")
 
 [node name="BOX" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.182122, 1.16983, 0.573946)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.182122, 1.34083, 0.680797)
 script = ExtResource("38_v2f7r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BOX"]
@@ -588,6 +631,37 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BOX"]
 shape = SubResource("BoxShape3D_oqqsx")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="BOX"]
+amount = 90
+lifetime = 30.0
+mesh = SubResource("BoxMesh_hs4tw")
+emission_shape = 3
+emission_box_extents = Vector3(0.1, 0.1, 0.1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.1
+initial_velocity_max = 0.2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("41_ypqwj")
+volume_db = -11.509
+autoplay = true
+parameters/looping = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hapol")
+script = ExtResource("42_h8kk1")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0282244, 0)
+amount = 20
+lifetime = 8.0
+randomness = 1.0
+mesh = SubResource("SphereMesh_in6sa")
+emission_shape = 3
+emission_box_extents = Vector3(2, 0, 2)
+gravity = Vector3(0, 0.1, 0)
 
 [connection signal="inte_hov" from="Basic FPS Player/Head/RayCast3D" to="Basic FPS Player/Control/Label" method="show_inte_text"]
 [connection signal="inte_unhov" from="Basic FPS Player/Head/RayCast3D" to="Basic FPS Player/Control/Label" method="hide_inte_text"]

@@ -4,6 +4,9 @@ class_name Pickup
 
 var cure_pickup_inte = null;
 
+@onready var pickup_sound_player = get_node("../../AudioPlayer")
+@onready var dropSound = get_node("../../Drop")
+
 func pickup(inte):
 	if cure_pickup_inte != null:
 		rele_inte()
@@ -11,6 +14,7 @@ func pickup(inte):
 		pickup_inte(inte)
 
 func rele_inte():
+	dropSound.play()
 	remove_child(cure_pickup_inte)
 	get_parent().get_parent().get_parent().add_child(cure_pickup_inte)
 	cure_pickup_inte.global_transform.origin = global_transform.origin
@@ -22,6 +26,8 @@ func rele_inte():
 	cure_pickup_inte = null
 
 func pickup_inte(inte):
+	pickup_sound_player.play()
+	
 	cure_pickup_inte = inte
 	cure_pickup_inte.get_parent().remove_child(cure_pickup_inte)
 	add_child(cure_pickup_inte)
